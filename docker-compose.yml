@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  streamlit-app:
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    depends_on:
+      - fastapi-app
+    volumes:
+      - ./streamlit_app:/app # add streamlit_app local files on app directory
+
+  fastapi-app:
+    build:
+      context: ./fastapi_app
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./fastapi_app:/app # add fastapi_app local files on app directory
